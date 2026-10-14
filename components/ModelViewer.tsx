@@ -168,7 +168,7 @@ export default function ModelViewer({
   return (
     <div
       ref={wrapperRef}
-      className={`relative overflow-hidden rounded-2xl bg-slate-100 ${className}`}
+      className={`relative overflow-hidden rounded-[24px] bg-[#f1ebe0] ${className}`}
     >
       {inView && libLoaded && status !== "error" && (
         <model-viewer
@@ -201,34 +201,34 @@ export default function ModelViewer({
       {/* Loading state */}
       {busy && (
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-slate-100"
+          className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#f1ebe0]"
           role="status"
           aria-live="polite"
         >
           <span
-            className="h-8 w-8 animate-spin rounded-full border-2 border-slate-300 border-t-sky-500"
+            className="h-8 w-8 animate-spin rounded-full border-2 border-stone-900/10 border-t-stone-800"
             aria-hidden="true"
           />
-          <p className="text-sm text-slate-500">Loading 3D model…</p>
+          <p className="text-sm text-stone-500">Preparing the studio…</p>
         </div>
       )}
 
       {/* Error state */}
       {status === "error" && (
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-slate-100 p-6 text-center"
+          className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#f1ebe0] p-6 text-center"
           role="alert"
         >
-          <p className="text-sm font-medium text-slate-700">
+          <p className="text-sm font-medium text-stone-700">
             Model could not be loaded.
           </p>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-stone-500">
             Check your connection and try again.
           </p>
           <button
             type="button"
             onClick={retry}
-            className="rounded-full bg-sky-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-600"
+            className="rounded-full bg-stone-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-stone-700"
           >
             Retry
           </button>
@@ -241,7 +241,7 @@ export default function ModelViewer({
           <button
             type="button"
             onClick={resetView}
-            className="rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 backdrop-blur transition-colors hover:bg-white"
+            className="rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-stone-700 shadow-sm ring-1 ring-stone-900/10 backdrop-blur transition-colors hover:bg-white"
           >
             Reset view
           </button>
@@ -251,8 +251,8 @@ export default function ModelViewer({
             aria-pressed={rotating}
             className={`rounded-full px-4 py-2 text-sm font-medium shadow-sm ring-1 backdrop-blur transition-colors ${
               rotating
-                ? "bg-sky-500 text-white ring-sky-500 hover:bg-sky-600"
-                : "bg-white/90 text-slate-700 ring-slate-200 hover:bg-white"
+                ? "bg-stone-900 text-white ring-stone-900 hover:bg-stone-700"
+                : "bg-white/90 text-stone-700 ring-stone-900/10 hover:bg-white"
             }`}
           >
             {rotating ? "Pause rotation" : "Auto-rotate"}
@@ -262,7 +262,7 @@ export default function ModelViewer({
 
       {/* Interaction hints */}
       {showHints && status === "ready" && (
-        <p className="pointer-events-none absolute left-1/2 top-3 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/80 px-3 py-1 text-xs text-slate-500 backdrop-blur">
+        <p className="pointer-events-none absolute left-1/2 top-3 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/80 px-3 py-1 text-xs text-stone-500 backdrop-blur">
           Drag to rotate&nbsp;&middot;&nbsp;Pinch to zoom
         </p>
       )}
