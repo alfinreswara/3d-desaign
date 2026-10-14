@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 /** Minimal typed surface of the <model-viewer> web component we use. */
 interface ModelViewerElement extends HTMLElement {
   cameraOrbit: string;
+  cameraTarget: string;
   autoRotate: boolean;
   src: string;
 }
@@ -19,11 +20,14 @@ type ModelViewerAttributes = React.DetailedHTMLProps<
   "camera-controls"?: boolean;
   "auto-rotate"?: boolean;
   "camera-orbit"?: string;
+  "camera-target"?: string;
   "min-camera-orbit"?: string;
   "max-camera-orbit"?: string;
   "field-of-view"?: string;
   "environment-image"?: string;
+  "tone-mapping"?: string;
   "shadow-intensity"?: string;
+  "shadow-softness"?: string;
   exposure?: string;
   loading?: "auto" | "lazy" | "eager";
   reveal?: "auto" | "interaction" | "manual";
@@ -39,7 +43,8 @@ declare module "react" {
   }
 }
 
-const DEFAULT_CAMERA_ORBIT = "32deg 68deg 1.05m";
+const DEFAULT_CAMERA_ORBIT = "35deg 62deg 0.85m";
+const DEFAULT_CAMERA_TARGET = "0m 0.03m 0m";
 
 export interface ModelViewerProps {
   src: string;
@@ -148,9 +153,9 @@ export default function ModelViewer({
     const el = viewerRef.current;
     if (el) {
       el.cameraOrbit = DEFAULT_CAMERA_ORBIT;
+      el.cameraTarget = DEFAULT_CAMERA_TARGET;
     }
   };
-
   const retry = () => {
     setLibFailed(false);
     setViewerFailed(false);
@@ -175,12 +180,15 @@ export default function ModelViewer({
           camera-controls
           auto-rotate={rotating}
           camera-orbit={DEFAULT_CAMERA_ORBIT}
-          min-camera-orbit="auto auto 0.35m"
-          max-camera-orbit="auto auto 2.5m"
-          field-of-view="32deg"
+          camera-target={DEFAULT_CAMERA_TARGET}
+          min-camera-orbit="auto auto 0.3m"
+          max-camera-orbit="auto auto 2m"
+          field-of-view="30deg"
           environment-image="neutral"
+          tone-mapping="neutral"
           shadow-intensity="1"
-          exposure="1"
+          shadow-softness="0.5"
+          exposure="1.1"
           touch-action="pan-y"
           loading="eager"
           reveal="auto"

@@ -35,7 +35,6 @@ export default function Hero() {
         <ModelViewer
           src={featured.glbPath}
           alt={`Interactive 3D preview of the ${featured.name}`}
-          poster={featured.previewImage}
           className="aspect-[3/2] w-full shadow-sm ring-1 ring-slate-200/70"
           showHints={false}
         />

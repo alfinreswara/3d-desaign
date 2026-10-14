@@ -12,11 +12,11 @@ export interface ModelMeta {
 export const models: ModelMeta[] = [
   {
     slug: "laptop",
-    name: "Laptop",
+    name: "Creator Laptop",
     description:
-      "A procedurally modeled laptop — aluminum chassis, full keyboard, trackpad, and an open display.",
+      "A low-poly creator laptop with an RGB keyboard, glowing display accents, and an open lid.",
     longDescription:
-      "This laptop was generated entirely with procedural geometry: a beveled aluminum chassis, 78 individual keycaps, a glass trackpad, dual-barrel hinges, side ports (USB-C, USB-A, HDMI, audio), and an open lid with an emissive display. Drag to orbit around it and zoom in to inspect the details.",
+      "A procedural low-poly creator laptop with an RGB backlit keyboard, neon display accents, side ports, and rubber feet. Presented at real-world scale — drag to orbit around it and zoom in to inspect the details.",
     glbPath: withBasePath("/models/laptop.glb"),
     previewImage: withBasePath("/images/laptop-preview.png"),
   },

@@ -7,9 +7,9 @@ import ModelViewer from "@/components/ModelViewer";
 import { getModel } from "@/lib/models";
 
 export const metadata: Metadata = {
-  title: "Laptop",
+  title: "Creator Laptop",
   description:
-    "A procedurally modeled laptop, presented as a fully interactive 3D model.",
+    "A low-poly creator laptop with RGB keyboard, presented as a fully interactive 3D model.",
 };
 
 export default function LaptopPage() {
@@ -41,7 +41,6 @@ export default function LaptopPage() {
             <ModelViewer
               src={model.glbPath}
               alt={`Interactive 3D model of a ${model.name}`}
-              poster={model.previewImage}
               lazy={false}
               className="mt-8 aspect-[4/3] w-full shadow-sm ring-1 ring-slate-200/70 sm:aspect-[16/10]"
             />
