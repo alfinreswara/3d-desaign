@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ModelViewer from "@/components/ModelViewer";
 import { getModel } from "@/lib/models";
+import { LAPTOP_HOTSPOTS } from "@/lib/hotspots";
 
 export const metadata: Metadata = {
   title: "Creator Laptop",
@@ -70,9 +71,36 @@ export default function LaptopPage() {
             <ModelViewer
               src={model.glbPath}
               alt={`Interactive 3D model of a ${model.name}`}
+              hotspots={LAPTOP_HOTSPOTS}
               lazy={false}
               className="relative aspect-[4/3] w-full rounded-[28px] shadow-[0_30px_70px_-30px_rgba(120,100,80,0.5)] ring-1 ring-white/70 sm:aspect-[16/10]"
             />
+          </section>
+
+          <section aria-label="Panduan bagian laptop" className="mt-6">
+            <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              {LAPTOP_HOTSPOTS.map((h) => (
+                <li
+                  key={h.id}
+                  className="flex items-start gap-3 rounded-3xl bg-white p-4 shadow-[0_18px_40px_-30px_rgba(120,100,80,0.5)] ring-1 ring-stone-900/[0.06]"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-stone-900 text-[11px] font-semibold text-white"
+                  >
+                    {h.n}
+                  </span>
+                  <span>
+                    <span className="block text-[13px] font-semibold text-stone-900">
+                      {h.title}
+                    </span>
+                    <span className="mt-0.5 block text-xs leading-relaxed text-stone-500">
+                      {h.body}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ol>
           </section>
 
           <dl className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

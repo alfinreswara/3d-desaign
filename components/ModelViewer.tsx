@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { Hotspot } from "@/lib/hotspots";
 
 /** Minimal typed surface of the <model-viewer> web component we use. */
 interface ModelViewerElement extends HTMLElement {
@@ -56,6 +57,8 @@ export interface ModelViewerProps {
   lazy?: boolean;
   /** Show the Reset view / auto-rotate controls. */
   showControls?: boolean;
+  /** Numbered annotation pins rendered inside the 3D scene. */
+  hotspots?: Hotspot[];
   /** Show the "Drag to rotate / Pinch to zoom" hints. */
   showHints?: boolean;
   className?: string;
@@ -70,6 +73,7 @@ export default function ModelViewer({
   autoRotate = true,
   lazy = true,
   showControls = true,
+  hotspots,
   showHints = true,
   className = "",
 }: ModelViewerProps) {
@@ -92,6 +96,8 @@ export default function ModelViewer({
     return false;
   });
   const [retryKey, setRetryKey] = useState(0);
+  const [labelsOn, setLabelsOn] = useState(true);
+  const showLabels = labelsOn && hotspots && hotspots.length > 0;
 
   const status: Status = viewerFailed || libFailed
     ? "error"
@@ -195,7 +201,29 @@ export default function ModelViewer({
           className="h-full w-full"
           style={{ minHeight: "100%" }}
           aria-label={alt}
-        />
+        >
+          {showLabels &&
+            hotspots!.map((h) => (
+              <button
+                key={h.id}
+                type="button"
+                slot={`hotspot-${h.id}`}
+                data-position={h.position.join(" ")}
+                data-normal={h.normal.join(" ")}
+                data-visibility-attribute="visible"
+                className="mv-hotspot"
+                aria-label={`${h.n}. ${h.title}: ${h.body}`}
+              >
+                <span aria-hidden="true" className="mv-hotspot-dot">
+                  {h.n}
+                </span>
+                <span aria-hidden="true" className="mv-hotspot-line" />
+                <span aria-hidden="true" className="mv-hotspot-tag">
+                  {h.title}
+                </span>
+              </button>
+            ))}
+        </model-viewer>
       )}
 
       {/* Loading state */}
@@ -245,6 +273,20 @@ export default function ModelViewer({
           >
             Reset view
           </button>
+          {hotspots && hotspots.length > 0 && (
+            <button
+              type="button"
+              onClick={() => setLabelsOn((v) => !v)}
+              aria-pressed={labelsOn}
+              className={`rounded-full px-4 py-2 text-sm font-medium shadow-sm ring-1 backdrop-blur transition-colors ${
+                labelsOn
+                  ? "bg-stone-900 text-white ring-stone-900 hover:bg-stone-700"
+                  : "bg-white/90 text-stone-700 ring-stone-900/10 hover:bg-white"
+              }`}
+            >
+              Labels
+            </button>
+          )}
           <button
             type="button"
             onClick={() => setRotating((r) => !r)}

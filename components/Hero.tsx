@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ModelViewer from "@/components/ModelViewer";
 import { models } from "@/lib/models";
+import { LAPTOP_HOTSPOTS } from "@/lib/hotspots";
 
 const SPECS = [
   { value: "0.34 m", label: "Real scale" },
@@ -88,6 +89,7 @@ export default function Hero() {
           <ModelViewer
             src={featured.glbPath}
             alt={`Interactive 3D preview of the ${featured.name}`}
+            hotspots={LAPTOP_HOTSPOTS}
             className="relative aspect-[4/3] w-full rounded-[28px] shadow-[0_30px_70px_-30px_rgba(120,100,80,0.5)] ring-1 ring-white/70"
             showHints={false}
           />
@@ -97,9 +99,6 @@ export default function Hero() {
               className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500"
             />
             Live 3D — drag to rotate
-          </p>
-          <p className="absolute bottom-4 right-4 rounded-full bg-stone-900/85 px-3 py-1.5 text-xs font-medium text-amber-50 shadow-sm backdrop-blur">
-            RGB keyboard · Neon display
           </p>
         </div>
       </div>
